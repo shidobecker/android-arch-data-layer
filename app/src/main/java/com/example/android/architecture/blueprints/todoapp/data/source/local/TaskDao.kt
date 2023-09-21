@@ -15,3 +15,32 @@
  */
 
 package com.example.android.architecture.blueprints.todoapp.data.source.local
+
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Upsert
+import kotlinx.coroutines.flow.Flow
+
+/**
+ * Methods for reading data are prefixed with observe. They are non-suspending functions that return a Flow.
+ * Each time the underlying data changes, a new item is emitted into the stream.
+ * This useful feature of the Room library (and many other data storage libraries) means you can listen for data changes rather
+ * than polling the database for new data.
+ */
+@Dao
+interface TaskDao{
+    @Query("SELECT * FROM task")
+    fun observeAll(): Flow<List<LocalTask>>
+
+    @Upsert
+    suspend fun upsert(task: LocalTask)
+
+    @Upsert
+    suspend fun upsertAll(tasks: List<LocalTask>)
+
+    @Query("UPDATE task SET isCompleted = :completed WHERE id = :taskId")
+    suspend fun updateCompleted(taskId: String, completed: Boolean)
+
+    @Query("DELETE FROM task")
+    suspend fun deleteAll()
+}
