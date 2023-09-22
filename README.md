@@ -18,5 +18,4 @@ Baseado em [Android Architecture DataLayer Codelab](https://github.com/android/a
  
 
 ## Preview
-
-![ezgif com-video-to-gif](https://github.com/shidobecker/android-arch-data-layer/assets/13834922/a429546b-7c7f-449f-b110-01a0d28114ea)
+ 
